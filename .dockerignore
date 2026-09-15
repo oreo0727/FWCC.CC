@@ -1,0 +1,10 @@
+node_modules
+mobile/node_modules
+.tools
+.env
+mobile/.env
+data
+.git
+mobile/.git
+mobile/dist
+artifacts

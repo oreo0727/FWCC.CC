@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "Christ’s Church",
+    "slug": "fwcc",
+    "version": "1.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/fwcc-icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "cc.fwcc.app",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff",
+        "foregroundImage": "./assets/fwcc-adaptive.png",
+        "monochromeImage": "./assets/fwcc-adaptive.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "cc.fwcc.app",
+      "permissions": [
+        "android.permission.READ_CALENDAR",
+        "android.permission.WRITE_CALENDAR"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/fwcc-icon.png"
+    },
+    "plugins": [
+      "expo-web-browser",
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "Add church events to your calendar when you choose."
+        }
+      ],
+      "expo-notifications",
+      "expo-font"
+    ],
+    "scheme": "fwcc",
+    "extra": {
+      "eas": {
+        "projectId": "c8090d99-bb77-4e5d-9a4b-f162ef63c5b4"
+      }
+    },
+    "owner": "oreo727"
+  }
+}

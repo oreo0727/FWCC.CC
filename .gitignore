@@ -1,0 +1,16 @@
+node_modules/
+.tools/
+.env
+.env.*
+!.env.example
+data/
+dist/
+.expo/
+*.log
+.DS_Store
+playwright-report/
+test-results/
+mobile/ios/
+mobile/android/
+
+**/dist-testflight*/

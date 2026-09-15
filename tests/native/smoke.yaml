@@ -1,0 +1,28 @@
+appId: cc.fwcc.app
+---
+- launchApp
+- assertVisible: "A PLACE TO BELONG"
+- takeScreenshot: artifacts/native-home
+- tapOn: "App settings"
+- scrollUntilVisible:
+    element: "Refresh church content"
+    direction: DOWN
+- tapOn: "Refresh church content"
+- extendedWaitUntil:
+    visible: "Up to date.*"
+    timeout: 60000
+- takeScreenshot: artifacts/native-settings
+- tapOn: "Close details"
+- tapOn: "Messages"
+- tapOn: "Search messages"
+- inputText: "Shine His Light"
+- hideKeyboard
+- assertVisible: "Shine His Light.*"
+- takeScreenshot: artifacts/native-messages
+- tapOn: "Events"
+- takeScreenshot: artifacts/native-events
+- tapOn: "Connect"
+- takeScreenshot: artifacts/native-connect
+- tapOn: "Give"
+- assertVisible: "Continue to giving"
+- takeScreenshot: artifacts/native-give
