@@ -105,3 +105,16 @@ Build 6 upload completed successfully on September 14 at 2:20 PM Eastern. Apple 
 - Apple Transporter uploaded `.tools/releases/FWCC-1.1.0-8.ipa` successfully on September 15, 2026 at 2:53 PM Eastern.
 - Apple build ID `9d36cb84-7eec-4281-822c-f094cec24104` is `VALID` and `IN_BETA_TESTING`. The FWCC internal TestFlight group has this build.
 - TestFlight release notes are configured. This is the current candidate to select for App Store review.
+
+
+## Next-level app candidate — build 9 attempt
+
+Attempted on September 24, 2026 after adding the futuristic visual refresh, smarter Home/Sunday context, guided next steps, prayer access, series browsing, notification preferences, and a refreshed bundled content snapshot.
+
+Preflight passed:
+
+- Synced website content: 100 messages, 3 events, 6 announcements.
+- Content tests passed: 11/11.
+- Root and mobile TypeScript checks passed.
+
+EAS incremented the remote iOS build number from 8 to 9 and confirmed remote iOS credentials and push notifications are configured. The build did not start because the Expo account has used its free iOS builds for the month. EAS reports the quota resets on October 1, 2026, or the account can be upgraded before retrying.
