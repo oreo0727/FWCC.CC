@@ -17,6 +17,7 @@ import {
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import type { NotificationResponse } from "expo-notifications";
 import { useContent, useFavorites } from "./src/content/useContent";
 import type { ChurchEvent, Message } from "./src/content/schema";
@@ -37,6 +38,12 @@ type Detail =
   | { kind: "settings" }
   | null;
 type Icon = React.ComponentProps<typeof Ionicons>["name"];
+type NextStep = {
+  title: string;
+  body: string;
+  icon: Icon;
+  action: () => void;
+};
 const icons: Record<Tab, Icon> = {
   Home: "home-outline",
   Messages: "play-circle-outline",
@@ -86,6 +93,7 @@ const nextSundayLabel = () => {
   const days = (7 - today.getDay()) % 7;
   return `${days} day${days === 1 ? "" : "s"} until Sunday`;
 };
+const onboardingKey = "fwcc:onboarding-dismissed:v1";
 function Button({
   title,
   icon,
@@ -231,6 +239,7 @@ function ChurchApp() {
   const [notice, setNotice] = useState("");
   const [playing, setPlaying] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [showWelcomePath, setShowWelcomePath] = useState(false);
   const scroll = useRef<ScrollView>(null);
   const events = content.events.filter((e) => Date.parse(e.end) >= Date.now());
   const latest = content.messages[0];
@@ -278,6 +287,45 @@ function ChurchApp() {
     setPlaying(false);
     setDetail(next);
   };
+  const dismissWelcomePath = () => {
+    setShowWelcomePath(false);
+    void AsyncStorage.setItem(onboardingKey, "1").catch(() => {});
+  };
+  const prayerUrl = `mailto:${content.church.email}?subject=${encodeURIComponent(
+    "Prayer request",
+  )}`;
+  const nextSteps: NextStep[] = [
+    {
+      title: "I'm new",
+      body: "Plan a visit, see service times, and send a connection card.",
+      icon: "sparkles-outline",
+      action: () => go("Connect"),
+    },
+    {
+      title: "I need prayer",
+      body: "Reach out to the church team for care and encouragement.",
+      icon: "chatbubble-ellipses-outline",
+      action: () => run(() => openUrl(prayerUrl)),
+    },
+    {
+      title: "I want to serve",
+      body: "Explore teams and opportunities to get involved.",
+      icon: "hand-left-outline",
+      action: () => run(() => openUrl("https://fwcc.cc/get-connected")),
+    },
+    {
+      title: "Find community",
+      body: "Connect with groups, ministries, and people walking with you.",
+      icon: "people-outline",
+      action: () => run(() => openUrl("https://fwcc.cc/get-connected")),
+    },
+    {
+      title: "Baptism",
+      body: "Take a public next step in following Jesus.",
+      icon: "water-outline",
+      action: () => run(() => openUrl("https://fwcc.cc/get-connected")),
+    },
+  ];
   useEffect(() => {
     const sub = BackHandler.addEventListener("hardwareBackPress", () => {
       if (detail) {
@@ -292,6 +340,17 @@ function ChurchApp() {
     });
     return () => sub.remove();
   }, [detail, tab]);
+  useEffect(() => {
+    let active = true;
+    AsyncStorage.getItem(onboardingKey)
+      .then((value) => {
+        if (active && value !== "1") setShowWelcomePath(true);
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
   useEffect(() => {
     if (Platform.OS === "web") return;
     let cleanup: (() => void) | undefined;
@@ -433,6 +492,35 @@ function ChurchApp() {
       </Pressable>
     </View>
   );
+  const NextStepCard = ({ step }: { step: NextStep }) => (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={step.title}
+      onPress={step.action}
+      style={({ pressed }) => [s.nextStepCard, pressed && s.pressed]}
+    >
+      <View style={s.nextStepIcon}>
+        <Ionicons
+          accessible={false}
+          aria-hidden={true}
+          name={step.icon}
+          size={22}
+          color={c.ink}
+        />
+      </View>
+      <View style={s.flex}>
+        <Text style={s.cardTitle}>{step.title}</Text>
+        <Text style={s.meta}>{step.body}</Text>
+      </View>
+      <Ionicons
+        accessible={false}
+        aria-hidden={true}
+        name="arrow-forward"
+        size={18}
+        color={c.muted}
+      />
+    </Pressable>
+  );
   return (
     <SafeAreaView style={s.root} edges={["top", "left", "right"]}>
       <StatusBar style={dark ? "light" : "dark"} />
@@ -479,6 +567,49 @@ function ChurchApp() {
                   <Text style={s.pillText}>You’re welcome here</Text>
                 </View>
               </View>
+              {showWelcomePath && (
+                <View style={s.pathPanel}>
+                  <View style={s.todayHeader}>
+                    <View style={s.flex}>
+                      <Text style={s.eyebrow}>WELCOME</Text>
+                      <Text style={s.sectionTitle}>
+                        What are you looking for?
+                      </Text>
+                    </View>
+                    <IconButton
+                      icon="close"
+                      label="Dismiss welcome choices"
+                      onPress={dismissWelcomePath}
+                    />
+                  </View>
+                  <View style={s.choiceGrid}>
+                    {nextSteps.slice(0, 3).map((step) => (
+                      <Pressable
+                        key={step.title}
+                        accessibilityRole="button"
+                        accessibilityLabel={step.title}
+                        onPress={() => {
+                          dismissWelcomePath();
+                          step.action();
+                        }}
+                        style={({ pressed }) => [
+                          s.choiceTile,
+                          pressed && s.pressed,
+                        ]}
+                      >
+                        <Ionicons
+                          accessible={false}
+                          aria-hidden={true}
+                          name={step.icon}
+                          size={21}
+                          color={c.ink}
+                        />
+                        <Text style={s.choiceText}>{step.title}</Text>
+                      </Pressable>
+                    ))}
+                  </View>
+                </View>
+              )}
               <View style={[s.hero, compact && s.heroCompact]}>
                 <View style={s.heroCircle} />
                 <View style={s.heroBeam} />
@@ -653,6 +784,12 @@ function ChurchApp() {
                   icon="arrow-forward"
                   secondary
                   onPress={() => go("Connect")}
+                />
+                <Button
+                  title="Request prayer"
+                  icon="chatbubble-ellipses-outline"
+                  secondary
+                  onPress={() => run(() => openUrl(prayerUrl))}
                 />
               </View>
               <Section title="Around the church" />
@@ -835,6 +972,15 @@ function ChurchApp() {
                 New here or here every week, we’re glad you’re part of the
                 story.
               </Text>
+              <View style={s.pathPanel}>
+                <Text style={s.eyebrow}>NEXT STEPS</Text>
+                <Text style={s.sectionTitle}>
+                  Find the right starting point.
+                </Text>
+                {nextSteps.map((step) => (
+                  <NextStepCard key={step.title} step={step} />
+                ))}
+              </View>
               <View style={s.visitCard}>
                 <Ionicons
                   accessible={false}
