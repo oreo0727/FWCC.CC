@@ -134,6 +134,6 @@ Local status:
 - That first profile belonged to the EAS-managed distribution certificate, so local signing rejected it. Fastlane `sigh --force` recreated a local-Xcode-compatible App Store profile: `d09ae2c2-8811-4721-9992-5a521fdcb8e6` (`cc.fwcc.app AppStore`).
 - Local Xcode archive succeeded for version `1.1.0` build `9`.
 - Local App Store IPA export succeeded: `.tools/local-xcode-build/FWCC-1.1.0-9-manual-newprofile/export/ChristsChurch.ipa`.
-- Upload to App Store Connect failed because Apple's upload tool requires an app-specific password for `jbaugh10@gmail.com`.
+- Fastlane Pilot uploaded the IPA to App Store Connect successfully on September 24, 2026 at 2:20 PM Eastern, using an app-specific password supplied interactively by the account owner.
 
-Next step: create an app-specific password at `account.apple.com`, then upload the exported IPA with Fastlane Pilot, Apple Transporter, or Xcode Organizer.
+Next step: wait for Apple processing, then confirm build `1.1.0 (9)` appears in App Store Connect/TestFlight and assign it to the intended internal tester group.
