@@ -32,16 +32,17 @@ Upload the exported IPA with Apple Transporter or Xcode Organizer.
 
 ## Current signing blocker
 
-On September 24, 2026, local prebuild and CocoaPods install succeeded, but local archiving could not complete because this Mac did not have an App Store provisioning profile for `cc.fwcc.app`.
+On September 24, 2026, local prebuild and CocoaPods install succeeded. The first local archive attempt could not complete because this Mac did not have an App Store provisioning profile for `cc.fwcc.app`.
 
-Installed local App Store profiles were for other bundle IDs:
+Fastlane `sigh` then downloaded and installed the App Store provisioning profile:
 
-- `com.jamesbaugh.petfoodintelligence`
-- `com.oreo0727.lockdown`
+- UUID: `428044cd-74a9-492c-8111-b7e5f649eba3`
+- Name: `*[expo] cc.fwcc.app AppStore 2026-09-08T19:53:04.036Z`
+- App identifier: `CXFPR6N64M.cc.fwcc.app`
+- Expiration: September 8, 2027
+- Entitlements include production push notifications and beta reports.
 
-Xcode automatic signing attempted to create a development profile and failed because no devices are registered for the team. TestFlight/App Store builds need distribution signing, not a development device profile.
-
-To finish the local path, do one of these:
+If provisioning expires or this setup moves to another Mac, do one of these:
 
 - In Xcode, sign into the Apple Developer account, open `mobile/ios/ChristsChurch.xcworkspace`, select the `ChristsChurch` target, enable automatic signing for team `CXFPR6N64M`, and create/download an App Store Connect distribution profile for `cc.fwcc.app`.
 - Or create an App Store Connect API key and run `xcodebuild` with `-authenticationKeyPath`, `-authenticationKeyID`, and `-authenticationKeyIssuerID`.

@@ -129,6 +129,7 @@ Local status:
 - `npx expo prebuild --platform ios --clean` succeeded.
 - CocoaPods install succeeded.
 - Xcode 26.6 detected the `ChristsChurch` workspace and scheme.
-- Archiving is blocked by Apple signing: this Mac does not currently have an App Store provisioning profile for `cc.fwcc.app`. The installed local App Store profiles are for other bundle IDs.
+- Initial archiving was blocked by Apple signing because this Mac did not have an App Store provisioning profile for `cc.fwcc.app`.
+- A fresh Apple 2FA code allowed Fastlane `sigh` to download and install the FWCC App Store profile: `428044cd-74a9-492c-8111-b7e5f649eba3`.
 
-Next step: create/download/install the App Store Connect distribution provisioning profile for `cc.fwcc.app`, or provide an App Store Connect API key for `xcodebuild` provisioning. Then rerun `BUILD_NUMBER=9 VERSION=1.1.0 ./scripts/local-testflight.sh`.
+Next step: rerun `BUILD_NUMBER=9 VERSION=1.1.0 ./scripts/local-testflight.sh` and export/upload the IPA.
