@@ -63,6 +63,29 @@ const messageDate = (date: string) =>
     day: "numeric",
     year: "numeric",
   });
+const sameLocalDay = (a: Date, b: Date) =>
+  a.getFullYear() === b.getFullYear() &&
+  a.getMonth() === b.getMonth() &&
+  a.getDate() === b.getDate();
+const eventStatus = (event: ChurchEvent) => {
+  const now = new Date();
+  const start = new Date(event.start);
+  const diff = start.getTime() - now.getTime();
+  const hours = Math.ceil(diff / 3600000);
+  const days = Math.ceil(diff / 86400000);
+  if (sameLocalDay(start, now)) return "Today";
+  if (hours > 0 && hours <= 48) return hours <= 24 ? "Tomorrow" : "This week";
+  if (days > 0 && days <= 7) return "This week";
+  if (event.registrationUrl) return "Registration open";
+  if (event.featured) return "Featured";
+  return "";
+};
+const nextSundayLabel = () => {
+  const today = new Date();
+  if (today.getDay() === 0) return "Sunday mode";
+  const days = (7 - today.getDay()) % 7;
+  return `${days} day${days === 1 ? "" : "s"} until Sunday`;
+};
 function Button({
   title,
   icon,
@@ -211,6 +234,11 @@ function ChurchApp() {
   const scroll = useRef<ScrollView>(null);
   const events = content.events.filter((e) => Date.parse(e.end) >= Date.now());
   const latest = content.messages[0];
+  const savedMessages = content.messages.filter((m) =>
+    favorites.includes(m.id),
+  );
+  const nextEvent = events[0];
+  const sundayMode = new Date().getDay() === 0;
   const series = content.announcements.find(
     (a) => a.title.toUpperCase() === latest?.series.toUpperCase(),
   );
@@ -320,6 +348,11 @@ function ChurchApp() {
           {event.location}
         </Text>
       </View>
+      {!!eventStatus(event) && (
+        <View style={s.statusPill}>
+          <Text style={s.statusText}>{eventStatus(event)}</Text>
+        </View>
+      )}
       <Ionicons
         accessible={false}
         aria-hidden={true}
@@ -489,6 +522,53 @@ function ChurchApp() {
                   <Text style={s.meta}>3131 Maplecrest Rd · Fort Wayne</Text>
                 </View>
               </View>
+              <View style={s.todayPanel}>
+                <View style={s.todayHeader}>
+                  <View style={s.flex}>
+                    <Text style={s.eyebrow}>
+                      {sundayMode ? "READY FOR TODAY" : "PLAN AHEAD"}
+                    </Text>
+                    <Text style={s.sectionTitle}>
+                      {sundayMode
+                        ? "Sunday at Christ's Church"
+                        : nextSundayLabel()}
+                    </Text>
+                  </View>
+                  <Ionicons
+                    accessible={false}
+                    aria-hidden={true}
+                    name={sundayMode ? "sparkles-outline" : "calendar-outline"}
+                    size={24}
+                    color={c.ink}
+                  />
+                </View>
+                <View style={s.statGrid}>
+                  <Pressable
+                    accessibilityRole="button"
+                    onPress={() => go("Connect")}
+                    style={s.statTile}
+                  >
+                    <Text style={s.statValue}>Visit</Text>
+                    <Text style={s.meta}>{content.church.services}</Text>
+                  </Pressable>
+                  <Pressable
+                    accessibilityRole="button"
+                    onPress={() =>
+                      nextEvent
+                        ? show({ kind: "event", item: nextEvent })
+                        : go("Events")
+                    }
+                    style={s.statTile}
+                  >
+                    <Text style={s.statValue}>
+                      {nextEvent ? eventStatus(nextEvent) || "Next" : "Events"}
+                    </Text>
+                    <Text style={s.meta} numberOfLines={2}>
+                      {nextEvent ? nextEvent.title : "See what's coming up"}
+                    </Text>
+                  </Pressable>
+                </View>
+              </View>
               <View style={s.quickActions}>
                 {(["Messages", "Events", "Give"] as Tab[]).map((t) => (
                   <Pressable
@@ -512,6 +592,21 @@ function ChurchApp() {
                   </Pressable>
                 ))}
               </View>
+              {!!savedMessages.length && (
+                <>
+                  <Section
+                    title="Saved for later"
+                    action="Open saved"
+                    onPress={() => {
+                      setSavedOnly(true);
+                      go("Messages");
+                    }}
+                  />
+                  {savedMessages.slice(0, 2).map((message) => (
+                    <MessageCard key={message.id} message={message} />
+                  ))}
+                </>
+              )}
               <Section
                 title="Latest message"
                 action="View all"
