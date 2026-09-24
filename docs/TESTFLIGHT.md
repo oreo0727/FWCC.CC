@@ -118,3 +118,17 @@ Preflight passed:
 - Root and mobile TypeScript checks passed.
 
 EAS incremented the remote iOS build number from 8 to 9 and confirmed remote iOS credentials and push notifications are configured. The build did not start because the Expo account has used its free iOS builds for the month. EAS reports the quota resets on October 1, 2026, or the account can be upgraded before retrying.
+
+
+## Local Xcode build attempt — September 24, 2026
+
+Created a no-EAS-cloud release path in `scripts/local-testflight.sh` and documented it in `docs/LOCAL_XCODE_RELEASE.md`.
+
+Local status:
+
+- `npx expo prebuild --platform ios --clean` succeeded.
+- CocoaPods install succeeded.
+- Xcode 26.6 detected the `ChristsChurch` workspace and scheme.
+- Archiving is blocked by Apple signing: this Mac does not currently have an App Store provisioning profile for `cc.fwcc.app`. The installed local App Store profiles are for other bundle IDs.
+
+Next step: create/download/install the App Store Connect distribution provisioning profile for `cc.fwcc.app`, or provide an App Store Connect API key for `xcodebuild` provisioning. Then rerun `BUILD_NUMBER=9 VERSION=1.1.0 ./scripts/local-testflight.sh`.
