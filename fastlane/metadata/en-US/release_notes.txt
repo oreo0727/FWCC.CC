@@ -1,0 +1,1 @@
+First public release candidate for Christ's Church. Includes messages, events, connecting, giving, saved messages, calendar export, local reminders, offline public content, and appearance settings.

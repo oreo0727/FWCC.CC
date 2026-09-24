@@ -199,7 +199,7 @@ test("appearance switches immediately, persists, and follows the system when sel
   await expect(dark).toHaveAttribute("aria-checked", "true");
   await expect(
     page.getByText("Make yourself at home.", { exact: true }),
-  ).toHaveCSS("color", "rgb(243, 242, 233)");
+  ).toHaveCSS("color", "rgb(237, 247, 244)");
   await page.reload();
   await page.getByRole("button", { name: "App settings", exact: true }).click();
   await expect(
@@ -217,18 +217,18 @@ test("appearance switches immediately, persists, and follows the system when sel
   await page.getByRole("radio", { name: "Light mode", exact: true }).click();
   await expect(
     page.getByText("Make yourself at home.", { exact: true }),
-  ).toHaveCSS("color", "rgb(32, 37, 31)");
+  ).toHaveCSS("color", "rgb(24, 32, 33)");
   await page.emulateMedia({ colorScheme: "dark" });
   // A manual choice remains light even when the OS is dark.
   await expect(
     page.getByText("Make yourself at home.", { exact: true }),
-  ).toHaveCSS("color", "rgb(32, 37, 31)");
+  ).toHaveCSS("color", "rgb(24, 32, 33)");
   await page.getByRole("radio", { name: "System mode", exact: true }).click();
   await expect(
     page.getByText("Make yourself at home.", { exact: true }),
-  ).toHaveCSS("color", "rgb(243, 242, 233)");
+  ).toHaveCSS("color", "rgb(237, 247, 244)");
   await page.emulateMedia({ colorScheme: "light" });
   await expect(
     page.getByText("Make yourself at home.", { exact: true }),
-  ).toHaveCSS("color", "rgb(32, 37, 31)");
+  ).toHaveCSS("color", "rgb(24, 32, 33)");
 });

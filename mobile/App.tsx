@@ -448,6 +448,8 @@ function ChurchApp() {
               </View>
               <View style={[s.hero, compact && s.heroCompact]}>
                 <View style={s.heroCircle} />
+                <View style={s.heroBeam} />
+                <View style={s.heroGrid} />
                 <Text style={s.heroEyebrow}>COME AS YOU ARE.</Text>
                 <Text
                   accessibilityRole="header"
@@ -829,6 +831,8 @@ function ChurchApp() {
           {tab === "Give" && (
             <>
               <View style={s.giveHero}>
+                <View style={s.heroCircle} />
+                <View style={s.heroBeam} />
                 <View style={s.giveIcon}>
                   <Ionicons
                     accessible={false}

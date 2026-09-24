@@ -1,0 +1,17 @@
+This app provides public Christ's Church content and links to existing church services.
+
+No account is required to use the app. Users can browse messages, events, visitor information, and giving links without signing in.
+
+Message playback uses YouTube. Giving opens the church's existing RebelGive hosted giving page in the system browser. Connection forms open existing Church Center or church website forms. The app does not collect payment information and does not process donations internally.
+
+Calendar and local reminder features are optional and are initiated by the user from an event detail screen.
+
+Suggested review path:
+
+1. Open the app on the Home tab.
+2. Open the latest message and press Play message.
+3. Visit the Events tab, open an event, and test Add to calendar or Remind me.
+4. Visit the Connect tab to see directions, contact, and connection links.
+5. Visit the Give tab and confirm that giving opens the external hosted provider.
+
+If live church content is temporarily unavailable, the app keeps the last valid public content snapshot and displays its freshness status.

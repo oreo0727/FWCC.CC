@@ -1,0 +1,20 @@
+The Christ's Church app helps you stay connected throughout the week.
+
+Watch recent messages, save messages for later, discover upcoming events, add events to your calendar, and find simple next steps for visiting, connecting, serving, and giving.
+
+Features:
+
+- Watch recent Sunday messages
+- Save messages to revisit later
+- Browse upcoming church events
+- Add events to your device calendar
+- Schedule optional event reminders
+- Find service times, directions, and contact details
+- Fill out a connection card
+- Explore ministries and serving opportunities
+- Give through the church's secure giving partner
+- Read saved public content when offline
+
+Christ's Church is located in Fort Wayne, Indiana. Our hope is to help people take their next step toward hope, healing, and community.
+
+Some features open trusted external providers, including YouTube, Church Center, Google Maps, and RebelGive. Giving and forms are handled by those providers, not inside the app.
