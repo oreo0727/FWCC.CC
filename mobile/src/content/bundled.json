@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "fetchedAt": "2026-09-12T15:04:06.380Z",
+  "fetchedAt": "2026-09-24T16:18:16.957Z",
   "source": "website",
   "church": {
     "name": "Christ's Church",
@@ -12,6 +12,28 @@
     "givingUrl": "https://givingflow.rebelgive.com/4f0798223b55691fee13"
   },
   "messages": [
+    {
+      "id": "35208475",
+      "title": "More Than Able",
+      "description": "26.09.13\n\nMessage: More Than Able\n\nSeries: BELIEVE\n\nChrist's Church - Ft. Wayne\n\nThank you for joining us!\n\nYou can support Christ's Church by visiting:\n\nhttps://fwcc.cc/give-online\n\nMake sure to follow us to stay connected:\n\nWebsite: https://fwcc.cc/\n\nFacebook: https://www.facebook.com/ccfortwayne/\n\nInstagram: https://www.instagram.com/ccfortwayne/\n\nYoutube: https://www.youtube.com/@ChristsChurchFortWayne\n\nCCLI License: 96790\n\nCCLI Streaming License: 20781908\n\nMusic from #Uppbeat (free for Creators!):\n\nhttps://uppbeat.io/t/kem/lazy-love\n\nLicense code: QOIWEYM5FAZE44HN\n\nMusic from #Uppbeat (free for Creators!):\n\nhttps://uppbeat.io/t/ra/cold-brew\n\nLicense code: A2IH3ON1QWLNPBOU",
+      "date": "2026-09-13",
+      "speaker": "Jason Kemerly",
+      "series": "BELIEVE",
+      "image": "https://i3.ytimg.com/vi/hdYklLDXKPA/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=hdYklLDXKPA",
+      "youtubeId": "hdYklLDXKPA"
+    },
+    {
+      "id": "35208474",
+      "title": "Come & See",
+      "description": "26.09.06\n\nMessage: Come & See\n\nSeries: BELIEVE\n\nChrist's Church - Ft. Wayne\n\nThank you for joining us!\n\nYou can support Christ's Church by visiting:\n\nhttps://fwcc.cc/give-online\n\nMake sure to follow us to stay connected:\n\nWebsite: https://fwcc.cc/\n\nFacebook: https://www.facebook.com/ccfortwayne/\n\nInstagram: https://www.instagram.com/ccfortwayne/\n\nYoutube: https://www.youtube.com/@ChristsChurchFortWayne\n\nCCLI License: 96790\n\nCCLI Streaming License: 20781908\n\nMusic from #Uppbeat (free for Creators!):\n\nhttps://uppbeat.io/t/kem/lazy-love\n\nLicense code: QOIWEYM5FAZE44HN\n\nMusic from #Uppbeat (free for Creators!):\n\nhttps://uppbeat.io/t/ra/cold-brew\n\nLicense code: A2IH3ON1QWLNPBOU",
+      "date": "2026-09-06",
+      "speaker": "Jason Kemerly",
+      "series": "BELIEVE",
+      "image": "https://i3.ytimg.com/vi/P1HJfRvBa1E/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=P1HJfRvBa1E",
+      "youtubeId": "P1HJfRvBa1E"
+    },
     {
       "id": "35204948",
       "title": "Shine His Light! (Believe)",
@@ -1089,92 +1111,9 @@
       "image": "https://i3.ytimg.com/vi/sgZplFTCOrY/mqdefault.jpg",
       "url": "https://www.youtube.com/watch?v=sgZplFTCOrY",
       "youtubeId": "sgZplFTCOrY"
-    },
-    {
-      "id": "34943167",
-      "title": "Make Us One",
-      "description": "Thank you for joining us today! We're glad you're here and we hope you find home with us.\n\nCCLI License#: 96790\n\nCCLI Streaming License#: 20781908\n\nMusic from #Uppbeat (free for Creators!):\n\nhttps://uppbeat.io/t/kem/lazy-love\n\nLicense code: QOIWEYM5FAZE44HN\n\nMusic from #Uppbeat (free for Creators!):\n\nhttps://uppbeat.io/t/ra/cold-brew\n\nLicense code: A2IH3ON1QWLNPBOU",
-      "date": "2024-10-14",
-      "speaker": "Jason Kemerly",
-      "series": "In God We Trust",
-      "image": "https://i3.ytimg.com/vi/m1DtQ_zx48k/mqdefault.jpg",
-      "url": "https://www.youtube.com/watch?v=m1DtQ_zx48k",
-      "youtubeId": "m1DtQ_zx48k"
-    },
-    {
-      "id": "34935335",
-      "title": "Christ's Church - Worship Service",
-      "description": "Thank you for joining us today! We're glad you're here and we hope you find home with us.\n\nCCLI License#: 96790\n\nCCLI Streaming License#: 20781908\n\nMusic from #Uppbeat (free for Creators!):\n\nhttps://uppbeat.io/t/kem/lazy-love\n\nLicense code: QOIWEYM5FAZE44HN\n\nMusic from #Uppbeat (free for Creators!):\n\nhttps://uppbeat.io/t/ra/cold-brew\n\nLicense code: A2IH3ON1QWLNPBOU",
-      "date": "2024-10-06",
-      "speaker": "Jason Kemerly",
-      "series": "Here For It",
-      "image": "https://i3.ytimg.com/vi/l_ZumHgTmGo/mqdefault.jpg",
-      "url": "https://www.youtube.com/watch?v=l_ZumHgTmGo",
-      "youtubeId": "l_ZumHgTmGo"
     }
   ],
   "events": [
-    {
-      "id": "fc8e52d4-3688-485c-92d7-31f462225d05",
-      "title": "9:00 Worship Service",
-      "description": "",
-      "start": "2026-09-13T09:00:00.000-04:00",
-      "end": "2026-09-13T10:30:00.000-04:00",
-      "timezone": "America/New_York",
-      "allDay": false,
-      "location": "Main Auditorium · 3131 Maplecrest Rd",
-      "featured": false,
-      "url": "https://fwcc.cc/events/2026/09/13/9-00-worship-service"
-    },
-    {
-      "id": "b2ca7298-2a15-460c-a9e8-964e8a85da15",
-      "title": "11:00 Worship Service",
-      "description": "",
-      "start": "2026-09-13T11:00:00.000-04:00",
-      "end": "2026-09-13T12:30:00.000-04:00",
-      "timezone": "America/New_York",
-      "allDay": false,
-      "location": "Main Auditorium · 3131 Maplecrest Rd",
-      "featured": false,
-      "url": "https://fwcc.cc/events/2026/09/13/11-00-worship-service"
-    },
-    {
-      "id": "c8098013-f0b9-411e-9905-2f17b5cc3dc9",
-      "title": "Welcome Lunch",
-      "description": "",
-      "start": "2026-09-13T12:45:00.000-04:00",
-      "end": "2026-09-13T14:00:00.000-04:00",
-      "timezone": "America/New_York",
-      "allDay": false,
-      "location": "Dining Room · 3131 Maplecrest Rd",
-      "featured": true,
-      "url": "https://fwcc.cc/events/2026/09/13/welcome-lunch",
-      "registrationUrl": "https://forms.ministryforms.net/viewForm.aspx?formId=8f579dae-5cbf-43f4-a081-50bf0e76248a"
-    },
-    {
-      "id": "883d6030-0449-4c9d-a2fb-6d01a131062c",
-      "title": "9:00 Worship Service",
-      "description": "",
-      "start": "2026-09-20T09:00:00.000-04:00",
-      "end": "2026-09-20T10:30:00.000-04:00",
-      "timezone": "America/New_York",
-      "allDay": false,
-      "location": "Main Auditorium · 3131 Maplecrest Rd",
-      "featured": false,
-      "url": "https://fwcc.cc/events/2026/09/20/9-00-worship-service"
-    },
-    {
-      "id": "8be17f24-73a4-4461-b18a-96ddbbb38a55",
-      "title": "11:00 Worship Service",
-      "description": "",
-      "start": "2026-09-20T11:00:00.000-04:00",
-      "end": "2026-09-20T12:30:00.000-04:00",
-      "timezone": "America/New_York",
-      "allDay": false,
-      "location": "Main Auditorium · 3131 Maplecrest Rd",
-      "featured": false,
-      "url": "https://fwcc.cc/events/2026/09/20/11-00-worship-service"
-    },
     {
       "id": "54c25482-b6ce-4d00-8fab-d80a9ccaf107",
       "title": "9:00 Worship Service",
@@ -1225,13 +1164,6 @@
       "body": "8/16-11/1\n\nBELIEVE means to accept something as true, to trust in it, and to place confidence in it.  But the biblical definition of believe goes deeper than simply agreeing that something is true. In the Gospel of John, to believe in Jesus means to trust Him, rely on Him, and place your confidence in who He is and what He has done.  Belief is not just something we hold in our minds; it becomes something that shapes our hearts and our lives.  John invites us to believe in Jesus because He is the Son of God, the Savior of the world, and the source of true life.\n\nJohn begins his Gospel by telling us, “In the beginning was the Word, and the Word was with God, and the Word was God” (John 1:1).  Jesus is the eternal Word of God through whom all things were created, and “in him was life” (John 1:4).  Then John 1:14 tells us, “The Word became flesh and made his dwelling among us.”  We believe in Jesus because of WHO He IS.  We see His identity through His words, His character, His love, His authority, and the miracles He performed.  His miracles were signs pointing people toward the truth that He is the Son of God.  From healing the sick to feeding thousands and raising Lazarus from the dead, Jesus demonstrated that He has authority over creation, sickness, sin, and death.\n\nWe also believe because of the way Jesus lived, died, and rose again.  Jesus lived a life of perfect love, humility, compassion, truth, and obedience to the Father. He willingly went to the cross and gave His life for us, demonstrating God's incredible love and making a way for our sins to be forgiven.  But the cross was not the end.  Jesus rose from the grave, conquering death and proving that He truly is the Son of God.  The resurrection gives us confidence that Jesus is alive and that the life He offers is real.  We don't simply believe because Jesus taught good things; we believe because of the evidence of His life, His miracles, His death, and His resurrection.\n\nJohn tells us why he wrote his Gospel: “These are written that you may believe that Jesus is the Messiah, the Son of God, and that by believing you may have life in his name” (John 20:31).  BELIEVE is more than saying, “I think Jesus is real.”  It is saying, “I trust Jesus because I believe He is who He says He is, and I believe what He has done is true.”  When we truly believe in Jesus, our belief changes the way we live.  We follow Him, trust Him, obey Him, and take our next steps with Him.  Because when we believe in Jesus, we have true life in His name.  Join us for our series: BELIEVE - Pastor Jason",
       "url": "https://fwcc.cc/#text-5033602",
       "image": "https://s3.amazonaws.com/media.cloversites.com/42/420ecf7e-4590-4df1-be47-46bce440466f/backgrounds/d1c01de1-7a27-4b94-9ea5-3254d5c96ab0.jpg"
-    },
-    {
-      "id": "text-5848051",
-      "title": "WELCOME LUNCH",
-      "body": "SEPTEMBER 13, 2026\n\nWe want to get to know you better, and help you get to know us!  If you have recently started attending Christ's Church within the past few months and haven't yet joined us for a Welcome Lunch, we would like to invite you to join us on Sunday, September 13, 2026, immediately following our 2nd Service (approximately 12:45 pm). \n\nThe lunch is held in the Dining Room off the Gym.  Your spouse/significant other, and kids, are also invited to attend with you.  This is a great opportunity to learn a little more about Christ's Church, talk with Jason and the staff, meet others who are new, and ask any questions you may have. \n \nIf you would like to attend, please sign up HERE.  Please note there is an option to let us know about any food allergies you may have.  And you can pre-submit a question you’d like to have answered, on the form, as well. \n \nWe look forward to seeing you!",
-      "url": "https://fwcc.cc/#text-5848051",
-      "image": "https://s3.amazonaws.com/media.cloversites.com/42/420ecf7e-4590-4df1-be47-46bce440466f/site-images/32ce28f7-764a-416c-80b0-0f69fdff053a.png"
     },
     {
       "id": "text-5858649",
