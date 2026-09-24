@@ -9,6 +9,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "cc.fwcc.app",
+      "buildNumber": "10",
       "config": {
         "usesNonExemptEncryption": false
       }

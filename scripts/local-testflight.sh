@@ -17,7 +17,7 @@ if ! command -v pod >/dev/null 2>&1; then
   exit 1
 fi
 
-BUILD_NUMBER="${BUILD_NUMBER:-9}"
+BUILD_NUMBER="${BUILD_NUMBER:-10}"
 VERSION="${VERSION:-1.1.0}"
 TEAM_ID="${TEAM_ID:-CXFPR6N64M}"
 CONFIGURATION="${CONFIGURATION:-Release}"

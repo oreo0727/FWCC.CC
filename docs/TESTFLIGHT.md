@@ -136,4 +136,10 @@ Local status:
 - Local App Store IPA export succeeded: `.tools/local-xcode-build/FWCC-1.1.0-9-manual-newprofile/export/ChristsChurch.ipa`.
 - Fastlane Pilot uploaded the IPA to App Store Connect successfully on September 24, 2026 at 2:20 PM Eastern, using an app-specific password supplied interactively by the account owner.
 
-Next step: wait for Apple processing, then confirm build `1.1.0 (9)` appears in App Store Connect/TestFlight and assign it to the intended internal tester group.
+Follow-up check:
+
+- App Store Connect accepted the upload and marked it `VALID`, but the packaged IPA reported `CFBundleVersion` as `1`.
+- `mobile/app.json` now sets `ios.buildNumber` explicitly so local Expo prebuild/Xcode archives carry the intended TestFlight build number.
+- The local release script now defaults to build `10` for the corrected upload.
+
+Next step: rebuild locally, verify the IPA reports `1.1.0 (10)`, upload it to App Store Connect, then assign it to the intended internal tester group.
