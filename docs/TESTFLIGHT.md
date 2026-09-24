@@ -143,3 +143,13 @@ Follow-up check:
 - The local release script now defaults to build `10` for the corrected upload.
 
 Next step: rebuild locally, verify the IPA reports `1.1.0 (10)`, upload it to App Store Connect, then assign it to the intended internal tester group.
+
+## Local Xcode build 10 upload - September 24, 2026
+
+- Local Xcode archive and export succeeded for version `1.1.0` build `10`.
+- Verified the exported IPA reports bundle id `cc.fwcc.app`, version `1.1.0`, and build `10`.
+- Exported IPA: `.tools/local-xcode-build/FWCC-1.1.0-10/ChristsChurch.ipa`.
+- Fastlane Pilot uploaded the IPA to App Store Connect successfully on September 24, 2026 at 3:08 PM Eastern.
+- App Store Connect build upload record `d78701b7-7123-4db5-a6c8-32d09fce2366` shows `1.1.0 (10)` in `PROCESSING` state.
+
+Next step: wait for Apple processing to complete, then confirm build `1.1.0 (10)` appears in TestFlight and assign it to the intended internal tester group.
