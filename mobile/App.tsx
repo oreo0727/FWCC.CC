@@ -34,6 +34,7 @@ import { ThemeProvider, useTheme } from "./src/theme";
 type Tab = "Home" | "Messages" | "Events" | "Connect" | "Give";
 type Detail =
   | { kind: "message"; item: Message }
+  | { kind: "series"; title: string; messages: Message[] }
   | { kind: "event"; item: ChurchEvent }
   | { kind: "settings" }
   | null;
@@ -44,6 +45,7 @@ type NextStep = {
   icon: Icon;
   action: () => void;
 };
+type NotificationPrefs = Record<string, boolean>;
 const icons: Record<Tab, Icon> = {
   Home: "home-outline",
   Messages: "play-circle-outline",
@@ -94,6 +96,14 @@ const nextSundayLabel = () => {
   return `${days} day${days === 1 ? "" : "s"} until Sunday`;
 };
 const onboardingKey = "fwcc:onboarding-dismissed:v1";
+const notificationPrefsKey = "fwcc:notification-prefs:v1";
+const notificationOptions = [
+  ["Messages", "New message and teaching updates"],
+  ["Events", "Upcoming events and registration reminders"],
+  ["Weather", "Weather, closure, and schedule alerts"],
+  ["Serving", "Serving opportunities and team reminders"],
+  ["Family", "Kids, students, and family ministry updates"],
+] as const;
 function Button({
   title,
   icon,
@@ -240,6 +250,9 @@ function ChurchApp() {
   const [playing, setPlaying] = useState(false);
   const [busy, setBusy] = useState(false);
   const [showWelcomePath, setShowWelcomePath] = useState(false);
+  const [notificationPrefs, setNotificationPrefs] = useState<NotificationPrefs>(
+    {},
+  );
   const scroll = useRef<ScrollView>(null);
   const events = content.events.filter((e) => Date.parse(e.end) >= Date.now());
   const latest = content.messages[0];
@@ -248,6 +261,17 @@ function ChurchApp() {
   );
   const nextEvent = events[0];
   const sundayMode = new Date().getDay() === 0;
+  const seriesGroups = Array.from(
+    content.messages
+      .reduce((map, message) => {
+        const key = message.series || "Sunday Messages";
+        const group = map.get(key) || [];
+        group.push(message);
+        map.set(key, group);
+        return map;
+      }, new Map<string, Message[]>())
+      .entries(),
+  );
   const series = content.announcements.find(
     (a) => a.title.toUpperCase() === latest?.series.toUpperCase(),
   );
@@ -290,6 +314,16 @@ function ChurchApp() {
   const dismissWelcomePath = () => {
     setShowWelcomePath(false);
     void AsyncStorage.setItem(onboardingKey, "1").catch(() => {});
+  };
+  const updateNotificationPref = (name: string) => {
+    setNotificationPrefs((current) => {
+      const next = { ...current, [name]: !current[name] };
+      void AsyncStorage.setItem(
+        notificationPrefsKey,
+        JSON.stringify(next),
+      ).catch(() => {});
+      return next;
+    });
   };
   const prayerUrl = `mailto:${content.church.email}?subject=${encodeURIComponent(
     "Prayer request",
@@ -345,6 +379,20 @@ function ChurchApp() {
     AsyncStorage.getItem(onboardingKey)
       .then((value) => {
         if (active && value !== "1") setShowWelcomePath(true);
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
+  useEffect(() => {
+    let active = true;
+    AsyncStorage.getItem(notificationPrefsKey)
+      .then((value) => {
+        if (!active || !value) return;
+        const parsed = JSON.parse(value);
+        if (parsed && typeof parsed === "object")
+          setNotificationPrefs(parsed as NotificationPrefs);
       })
       .catch(() => {});
     return () => {
@@ -881,6 +929,31 @@ function ChurchApp() {
                   </Pressable>
                 ))}
               </View>
+              <Section title="Browse by series" />
+              <View style={s.seriesGrid}>
+                {seriesGroups.slice(0, 6).map(([name, messages]) => (
+                  <Pressable
+                    key={name}
+                    accessibilityRole="button"
+                    accessibilityLabel={`${name} series`}
+                    onPress={() =>
+                      show({ kind: "series", title: name, messages })
+                    }
+                    style={({ pressed }) => [
+                      s.seriesTile,
+                      pressed && s.pressed,
+                    ]}
+                  >
+                    <Text style={s.cardTitle} numberOfLines={2}>
+                      {name}
+                    </Text>
+                    <Text style={s.meta}>
+                      {messages.length} message
+                      {messages.length === 1 ? "" : "s"}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
               {matches.map((m) => (
                 <MessageCard key={m.id} message={m} />
               ))}
@@ -1199,7 +1272,9 @@ function ChurchApp() {
                       ? "APP SETTINGS"
                       : detail?.kind === "event"
                         ? "LIFE TOGETHER"
-                        : "SUNDAY MESSAGE"}
+                        : detail?.kind === "series"
+                          ? "MESSAGE SERIES"
+                          : "SUNDAY MESSAGE"}
                   </Text>
                   <View style={{ width: 44 }} />
                 </View>
@@ -1282,6 +1357,23 @@ function ChurchApp() {
                         icon="open-outline"
                         onPress={() => run(() => openUrl(detail.item.url))}
                       />
+                    </>
+                  )}
+                  {detail?.kind === "series" && (
+                    <>
+                      <Text style={s.eyebrow}>MESSAGE SERIES</Text>
+                      <Text
+                        style={[s.pageTitle, compact && s.pageTitleCompact]}
+                      >
+                        {detail.title}
+                      </Text>
+                      <Text style={s.lead}>
+                        {detail.messages.length} message
+                        {detail.messages.length === 1 ? "" : "s"} to explore.
+                      </Text>
+                      {detail.messages.map((message) => (
+                        <MessageCard key={message.id} message={message} />
+                      ))}
                     </>
                   )}
                   {detail?.kind === "event" && (
@@ -1399,6 +1491,46 @@ function ChurchApp() {
                           {themeError}
                         </Text>
                       )}
+                      <Section title="Notification preferences" />
+                      <Text style={s.body}>
+                        Choose the updates you care about. Church-wide push
+                        delivery can use these preferences when it is connected.
+                      </Text>
+                      <View style={s.prefList}>
+                        {notificationOptions.map(([name, body]) => (
+                          <Pressable
+                            key={name}
+                            accessibilityRole="switch"
+                            accessibilityState={{
+                              checked: !!notificationPrefs[name],
+                            }}
+                            accessibilityLabel={`${name} notifications`}
+                            onPress={() => updateNotificationPref(name)}
+                            style={({ pressed }) => [
+                              s.prefRow,
+                              pressed && s.pressed,
+                            ]}
+                          >
+                            <View style={s.flex}>
+                              <Text style={s.cardTitle}>{name}</Text>
+                              <Text style={s.meta}>{body}</Text>
+                            </View>
+                            <View
+                              style={[
+                                s.switchTrack,
+                                notificationPrefs[name] && s.switchTrackOn,
+                              ]}
+                            >
+                              <View
+                                style={[
+                                  s.switchThumb,
+                                  notificationPrefs[name] && s.switchThumbOn,
+                                ]}
+                              />
+                            </View>
+                          </Pressable>
+                        ))}
+                      </View>
                       <Section title="Reminders" />
                       <Text style={s.body}>
                         A reminder uses the event time when you set it. Check
