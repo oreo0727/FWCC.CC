@@ -23,6 +23,9 @@ TEAM_ID="${TEAM_ID:-CXFPR6N64M}"
 CONFIGURATION="${CONFIGURATION:-Release}"
 SCHEME="${SCHEME:-ChristsChurch}"
 EXPORT_METHOD="${EXPORT_METHOD:-app-store-connect}"
+PROFILE_NAME="${PROFILE_NAME:-cc.fwcc.app AppStore}"
+PROFILE_UUID="${PROFILE_UUID:-d09ae2c2-8811-4721-9992-5a521fdcb8e6}"
+SIGNING_CERTIFICATE="${SIGNING_CERTIFICATE:-Apple Distribution}"
 EXPORT_DIR="$PWD/.tools/local-xcode-build/FWCC-$VERSION-$BUILD_NUMBER"
 ARCHIVE_PATH="$EXPORT_DIR/$SCHEME.xcarchive"
 EXPORT_OPTIONS="$EXPORT_DIR/ExportOptions.plist"
@@ -46,7 +49,14 @@ cat > "$EXPORT_OPTIONS" <<PLIST
   <key>teamID</key>
   <string>$TEAM_ID</string>
   <key>signingStyle</key>
-  <string>automatic</string>
+  <string>manual</string>
+  <key>signingCertificate</key>
+  <string>$SIGNING_CERTIFICATE</string>
+  <key>provisioningProfiles</key>
+  <dict>
+    <key>cc.fwcc.app</key>
+    <string>$PROFILE_NAME</string>
+  </dict>
   <key>stripSwiftSymbols</key>
   <true/>
   <key>uploadSymbols</key>
@@ -65,7 +75,10 @@ xcodebuild archive \
   DEVELOPMENT_TEAM="$TEAM_ID" \
   CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
   MARKETING_VERSION="$VERSION" \
-  CODE_SIGN_STYLE=Automatic
+  CODE_SIGN_STYLE=Manual \
+  CODE_SIGN_IDENTITY="$SIGNING_CERTIFICATE" \
+  PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" \
+  PROVISIONING_PROFILE="$PROFILE_UUID"
 
 xcodebuild -exportArchive \
   -archivePath "$ARCHIVE_PATH" \
@@ -74,4 +87,5 @@ xcodebuild -exportArchive \
   -allowProvisioningUpdates
 
 echo "Local App Store IPA exported to $EXPORT_DIR"
-echo "Upload with Apple Transporter or Xcode Organizer."
+echo "Upload with Apple Transporter, Xcode Organizer, or:"
+echo "FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=... fastlane pilot upload --ipa \"$EXPORT_DIR/ChristsChurch.ipa\" --username jbaugh10@gmail.com --app_identifier cc.fwcc.app --team_id $TEAM_ID --skip_waiting_for_build_processing true"

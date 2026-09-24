@@ -131,5 +131,9 @@ Local status:
 - Xcode 26.6 detected the `ChristsChurch` workspace and scheme.
 - Initial archiving was blocked by Apple signing because this Mac did not have an App Store provisioning profile for `cc.fwcc.app`.
 - A fresh Apple 2FA code allowed Fastlane `sigh` to download and install the FWCC App Store profile: `428044cd-74a9-492c-8111-b7e5f649eba3`.
+- That first profile belonged to the EAS-managed distribution certificate, so local signing rejected it. Fastlane `sigh --force` recreated a local-Xcode-compatible App Store profile: `d09ae2c2-8811-4721-9992-5a521fdcb8e6` (`cc.fwcc.app AppStore`).
+- Local Xcode archive succeeded for version `1.1.0` build `9`.
+- Local App Store IPA export succeeded: `.tools/local-xcode-build/FWCC-1.1.0-9-manual-newprofile/export/ChristsChurch.ipa`.
+- Upload to App Store Connect failed because Apple's upload tool requires an app-specific password for `jbaugh10@gmail.com`.
 
-Next step: rerun `BUILD_NUMBER=9 VERSION=1.1.0 ./scripts/local-testflight.sh` and export/upload the IPA.
+Next step: create an app-specific password at `account.apple.com`, then upload the exported IPA with Fastlane Pilot, Apple Transporter, or Xcode Organizer.
